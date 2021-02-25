@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="grandparent">
+        <div class="parent">
+            <div class="child">1</div>
+        </div>
+    </div>
+    <script>
+        function addEvent(el, event, callback, isCapture = false) {
+            if (!el || !event || !callback || typeof callback !== "function") return;
+            if (typeof el === "string") {
+                el = document.querySelector(el);
+            }
+            el.addEventListener(event, callback, isCapture);
+            }
+
+            addEvent(document, "DOMContentLoaded", () =>{
+            const child = document.querySelector(".child");
+            const parent = document.querySelector(".parent");
+            const grandparent = document.querySelector(".grandparent");
+
+            addEvent(child, "click", () => {
+                console.log("child");
+            });
+
+            addEvent(parent, "click", () => {
+                console.log("parent");
+            });
+
+            addEvent(grandparent, "click", () => {
+                console.log("grandparent");
+            });
+
+            addEvent(document, "click", () => {
+                console.log("document");
+            });
+
+            addEvent("html", "click", () => {
+                console.log("html");
+            });
+
+            addEvent(window, "click", () => {
+                console.log("window");
+            });
+            });
+    </script>
+</body>
+</html>
